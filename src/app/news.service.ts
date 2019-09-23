@@ -14,11 +14,13 @@ export class NewsService {
   getAllUrl;
   getByIdUrl;
   deleteUrl;
+  saveUrl;
 
   constructor(private http: HttpClient) {
     this.getAllUrl = 'http://localhost:8080/news/allnews';
     this.getByIdUrl = 'http://localhost:8080/news/';
     this.deleteUrl = 'http://localhost:8080/news/delete/';
+    this.saveUrl = 'http://localhost:8080/news/saveNews';
   }
 
   getAll(): Observable<News[]> {
@@ -31,5 +33,9 @@ export class NewsService {
 
   getDelete(id) {
     return this.http.get(this.deleteUrl + id);
+  }
+
+  save(news: News) {
+    return this.http.post(this.saveUrl, news);
   }
 }

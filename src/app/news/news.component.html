@@ -18,7 +18,7 @@
 </table>
 <div class="btn-group info-btns" role="group">
   <button type="button" class="btn btn-outline-primary"
-          [routerLink]="['news/edit',news]">Edit
+          [routerLink]="['/news/edit', news.id]" >Edit
   </button>
   <button type="button" class="btn btn-outline-danger"
           (click)= delete()>Delete

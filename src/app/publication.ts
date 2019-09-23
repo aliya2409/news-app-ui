@@ -1,19 +1,19 @@
 class Publication {
   content: string;
-  creationTime: string;
+  creationDate: string;
   id: number;
 
-  constructor(id: number, content: string, creationTime: string) {
+  constructor(id: number, content: string, creationDate: string) {
     this.id = id;
     this.content = content;
-    this.creationTime = creationTime;
+    this.creationDate = creationDate;
   }
 }
 
 export class News extends Publication {
   title: string;
   brief: string;
-  comments: Comment[];
+  comments: Comment[] = [];
 
   constructor(id: number, content: string, creationTime: string, title: string, brief: string, comments: Comment[]) {
     super(id, content, creationTime);

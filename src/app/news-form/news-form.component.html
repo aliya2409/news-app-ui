@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<form (ngSubmit)="onSubmit()" #newsForm="ngForm">
+<table>
+  <tr class="form-group">
+    <td><label for="title">Title</label></td>
+    <td><input type="text" class="form-control" id="title" name="title" [(ngModel)]="news.title" #title="ngModel" required></td>
+  </tr>
+  <tr class="form-group">
+    <td><label for="brief">Brief</label></td>
+    <td><input type="text" class="form-control" id="brief" name="brief" [(ngModel)]="news.brief" #brief="ngModel" required></td>
+  </tr>
+  <tr class="form-group">
+    <td><label for="content">Content</label></td>
+    <td><input type="text" class="form-control" id="content" name="content"[(ngModel)]="news.content" #content="ngModel" required></td>
+  </tr>
+  <input type="hidden" id="id" name="id" [(ngModel)]="news.id"/>
+  <input type="hidden" id="creationDate" name="creationDate" [(ngModel)]="news.creationDate"/>
+  <input type="hidden" id="comments" name="comments" [(ngModel)]="news.comments"/>
+</table>
+  <div>
+    <button type="submit" class="btn btn-outline-primary">Save</button>
+    <button type="button" class="btn btn-outline-danger">Cancel</button>
+  </div>
+</form>

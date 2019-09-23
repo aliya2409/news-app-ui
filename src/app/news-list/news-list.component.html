@@ -1,6 +1,4 @@
 <h2>All news</h2>
-<div *ngIf="test">{{test}}</div>
-
   <div *ngFor="let news of newsList;" class="news-comment-li">
     <h4 class="news-li__title">{{news.title}}</h4>
     <a class="news-li__date align-right">{{news.creationDate}}</a>
@@ -9,7 +7,7 @@
       <button [routerLink]="['/news', news.id]" class="btn btn-outline-primary btn-sm">
         View
       </button>
-      <button [routerLink]="['/news/edit', news]" class="btn btn-outline-primary btn-sm">
+      <button [routerLink]="['/news/edit', news.id]" class="btn btn-outline-primary btn-sm">
         Edit
       </button>
       <input type="checkbox" path="ids" [value]="[news.id]"/>
