@@ -38,22 +38,42 @@
   </div>
 
   <h5>Add your comment</h5>
-
+  <app-comment-form>
+    [comment]="null" [news]="news"
+  </app-comment-form>
   <div *ngFor="let comment of news.comments;">
-    <div class="news-comment-li">
-      <a class="comment-li-author">{{comment.author}}</a>
-      <a class="comment-li-date">{{comment.creationDate}}</a>
-      <a class="comment-li-content">{{comment.content}}</a>
-      <a class="comment-li-rating">{{comment.rating}}</a>
+    <table>
+      <tr>
+        <td>Author</td>
+        <td>{{comment.author}}</td>
+      </tr>
+      <tr>
+        <td>Creation date</td>
+        <td>{{comment.creationDate}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{comment.content}}</td>
+      </tr>
+      <tr>
+        <td>Rating</td>
+        <td>{{comment.rating}}</td>
+      </tr>
+    </table>
         <div class="btn-group comment-li-buttons">
           <button type="button" class="btn btn-outline-primary btn-sm"
-                  data-toggle="collapse" data-target="#editCollapse-${commentary.id}"
-                  aria-expanded="false" aria-controls="editCollapse-${commentary.id}">edit
+                  data-toggle="collapse" [data-target]="#editCollapse-{{comment.id}}"
+                  aria-expanded="false" [aria-controls]="editCollapse-{{comment.id}}">edit
           </button>
           <button type="button" class="btn btn-outline-danger btn-sm"
-                  onclick="window.location.href='/comments/delete/${news.id}/${commentary.id}'">delete
+                  [(click)] = "onDeleteComment({{comment.id}})">delete
           </button>
         </div>
+    <div class="collapse" [id]="editCollapse-{{comment.id}}">
+      <app-comment-form>
+        [comment]="comment" [news]="news"
+      </app-comment-form>
+    </div>
     </div>
   </div>
 </div>

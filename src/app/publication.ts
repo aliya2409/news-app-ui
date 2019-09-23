@@ -25,9 +25,11 @@ export class News extends Publication {
 
 export class Comment extends Publication {
   author: string;
+  news: News;
 
-  constructor(id: number, content: string, creationTime: string, author: string) {
+  constructor(id: number, content: string, creationTime: string, author: string, news: News) {
     super(id, content, creationTime);
     this.author = author;
+    this.news = news;
   }
 }

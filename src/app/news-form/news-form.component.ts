@@ -36,6 +36,9 @@ export class NewsFormComponent implements OnInit {
     this.newsService.save(this.news).subscribe(
       data => {
         console.log("POST Request is successful ", data);
+        this.router.navigate(['/news/' + this.id]).then(() => {
+          window.location.reload();
+        });
       },
       error => {
 

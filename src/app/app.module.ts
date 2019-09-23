@@ -9,13 +9,16 @@ import {NewsListComponent} from './news-list/news-list.component';
 import {NewsService} from './news.service';
 import {NewsComponent} from './news/news.component';
 import {NewsFormComponent} from './news-form/news-form.component';
+import {CommentFormComponent} from './comment-form.component/comment-form.component';
+import {CommentService} from './comment.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsListComponent,
     NewsComponent,
-    NewsFormComponent
+    NewsFormComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import {NewsFormComponent} from './news-form/news-form.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [NewsService],
+  providers: [NewsService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

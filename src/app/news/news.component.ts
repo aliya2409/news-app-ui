@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 
 import {NewsService} from '../news.service';
 import {News} from '../publication';
+import {CommentService} from '../comment.service';
 
 @Component({
   selector: 'app-news',
@@ -14,7 +15,7 @@ export class NewsComponent implements OnInit {
   news: News;
   id;
 
-  constructor(private route: ActivatedRoute, private newsService: NewsService, private router: Router) {
+  constructor(private route: ActivatedRoute, private newsService: NewsService, private router: Router, private commentService: CommentService) {
   }
 
   ngOnInit() {
@@ -33,5 +34,19 @@ export class NewsComponent implements OnInit {
     this.router.navigate(['/news']).then(() => {
       window.location.reload();
     });
+  }
+
+  onDeleteComment(commentId) {
+    this.commentService.getDelete(this.id, commentId).subscribe(
+      data => {
+        console.log("GET Request is successful ", data);
+          window.location.reload();
+      },
+      error => {
+
+        console.log("Error", error);
+
+      }
+    );
   }
 }
