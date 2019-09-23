@@ -1,0 +1,59 @@
+<table>
+<tr>
+  <td>Title</td>
+  <td>{{news.title}}</td>
+</tr>
+  <tr>
+    <td>Creation date</td>
+    <td>{{news.creationDate}}</td>
+  </tr>
+  <tr>
+    <td>Brief</td>
+    <td>{{news.brief}}</td>
+  </tr>
+  <tr>
+    <td>Content</td>
+    <td>{{news.content}}</td>
+  </tr>
+</table>
+<div class="btn-group info-btns" role="group">
+  <button type="button" class="btn btn-outline-primary"
+          [routerLink]="['news/edit',news]">Edit
+  </button>
+  <button type="button" class="btn btn-outline-danger"
+          (click)= delete()>Delete
+  </button>
+</div>
+<div id="comments">
+  <h3>Comments</h3>
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort by
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" [href]="'/news/'+news.id+'?sortBy=date'">date</a>
+      <a class="dropdown-item" [href]="'/news/'+news.id+'?sortBy=rating'">rating</a>
+    </div>
+  </div>
+
+  <h5>Add your comment</h5>
+
+  <div *ngFor="let comment of news.comments;">
+    <div class="news-comment-li">
+      <a class="comment-li-author">{{comment.author}}</a>
+      <a class="comment-li-date">{{comment.creationDate}}</a>
+      <a class="comment-li-content">{{comment.content}}</a>
+      <a class="comment-li-rating">{{comment.rating}}</a>
+        <div class="btn-group comment-li-buttons">
+          <button type="button" class="btn btn-outline-primary btn-sm"
+                  data-toggle="collapse" data-target="#editCollapse-${commentary.id}"
+                  aria-expanded="false" aria-controls="editCollapse-${commentary.id}">edit
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm"
+                  onclick="window.location.href='/comments/delete/${news.id}/${commentary.id}'">delete
+          </button>
+        </div>
+    </div>
+  </div>
+</div>
