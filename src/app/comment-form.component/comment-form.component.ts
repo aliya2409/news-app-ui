@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {CommentService} from '../news.service';
+import {CommentService} from '../comment.service';
 import {Comment, News} from '../publication';
 
 @Component({
@@ -10,13 +10,10 @@ import {Comment, News} from '../publication';
 })
 
 export class CommentFormComponent implements OnInit {
-  @Input() comment: Comment;
-  @Input() news: News;
+  @Input() commentModel: Comment = new Comment(null, '', null, '', 0);
+  @Input() newsId;
 
   constructor(private commentService: CommentService, private router: Router) {
-    if (this.comment === null) {
-      this.comment = new Comment(null, '', null, '', this.news);
-    }
   }
 
   ngOnInit() {
@@ -24,11 +21,11 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.comment);
-    this.commentService.save(this.comment).subscribe(
+    console.log(this.commentModel);
+    this.commentService.save(this.commentModel, this.newsId).subscribe(
       data => {
         console.log('POST Request is successful ', data);
-        this.router.navigate(['/news/' + this.news.id]).then(() => {
+        this.router.navigate(['/news/' + this.newsId]).then(() => {
           window.location.reload();
         });
       },

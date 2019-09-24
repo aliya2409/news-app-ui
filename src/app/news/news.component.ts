@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {NewsService} from '../news.service';
 import {News} from '../publication';
@@ -21,12 +20,14 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
+      console.log(this.id);
       this.getNewsById();
+      console.log(this.news);
     });
   }
 
-  getNewsById() {
-    this.newsService.getById(this.id).subscribe((data) => this.news = data);
+  async getNewsById() {
+    await this.newsService.getById(this.id).toPromise().then(data => this.news = data);
   }
 
   delete() {
@@ -40,7 +41,7 @@ export class NewsComponent implements OnInit {
     this.commentService.getDelete(this.id, commentId).subscribe(
       data => {
         console.log("GET Request is successful ", data);
-          window.location.reload();
+        window.location.reload();
       },
       error => {
 

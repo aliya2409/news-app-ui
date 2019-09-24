@@ -1,8 +1,8 @@
-<table>
-<tr>
-  <td>Title</td>
-  <td>{{news.title}}</td>
-</tr>
+<table *ngIf="news">
+  <tr>
+    <td>Title</td>
+    <td>{{news.title}}</td>
+  </tr>
   <tr>
     <td>Creation date</td>
     <td>{{news.creationDate}}</td>
@@ -18,13 +18,13 @@
 </table>
 <div class="btn-group info-btns" role="group">
   <button type="button" class="btn btn-outline-primary"
-          [routerLink]="['/news/edit', news.id]" >Edit
+          [routerLink]="['/news/edit', news.id]">Edit
   </button>
   <button type="button" class="btn btn-outline-danger"
-          (click)= delete()>Delete
+          (click)=delete()>Delete
   </button>
 </div>
-<div id="comments">
+<div id="comments" *ngIf="news">
   <h3>Comments</h3>
   <div class="dropdown">
     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -35,12 +35,9 @@
       <a class="dropdown-item" [href]="'/news/'+news.id+'?sortBy=date'">date</a>
       <a class="dropdown-item" [href]="'/news/'+news.id+'?sortBy=rating'">rating</a>
     </div>
+    <h5>Add your comment</h5>
+    <app-comment-form [newsId]="news.id"></app-comment-form>
   </div>
-
-  <h5>Add your comment</h5>
-  <app-comment-form>
-    [comment]="null" [news]="news"
-  </app-comment-form>
   <div *ngFor="let comment of news.comments;">
     <table>
       <tr>
@@ -60,20 +57,17 @@
         <td>{{comment.rating}}</td>
       </tr>
     </table>
-        <div class="btn-group comment-li-buttons">
-          <button type="button" class="btn btn-outline-primary btn-sm"
-                  data-toggle="collapse" [data-target]="#editCollapse-{{comment.id}}"
-                  aria-expanded="false" [aria-controls]="editCollapse-{{comment.id}}">edit
-          </button>
-          <button type="button" class="btn btn-outline-danger btn-sm"
-                  [(click)] = "onDeleteComment({{comment.id}})">delete
-          </button>
-        </div>
-    <div class="collapse" [id]="editCollapse-{{comment.id}}">
-      <app-comment-form>
-        [comment]="comment" [news]="news"
-      </app-comment-form>
+    <div class="btn-group comment-li-buttons">
+      <button type="button" class="btn btn-outline-primary btn-sm"
+              data-toggle="collapse" [attr.data-target]="'#editCollapse-' + comment.id"
+              aria-expanded="false" [attr.aria-controls]="'editCollapse-' + comment.id">edit
+      </button>
+      <button type="button" class="btn btn-outline-danger btn-sm"
+              (click)="onDeleteComment(comment.id)">delete
+      </button>
     </div>
+    <div class="collapse" [id]="'editCollapse-' + comment.id">
+      <app-comment-form [commentModel]="comment" [newsId]="news.id"></app-comment-form>
     </div>
   </div>
 </div>

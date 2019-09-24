@@ -13,7 +13,7 @@ class Publication {
 export class News extends Publication {
   title: string;
   brief: string;
-  comments: Comment[] = [];
+  comments: Comment[];
 
   constructor(id: number, content: string, creationTime: string, title: string, brief: string, comments: Comment[]) {
     super(id, content, creationTime);
@@ -25,11 +25,11 @@ export class News extends Publication {
 
 export class Comment extends Publication {
   author: string;
-  news: News;
+  rating: number;
 
-  constructor(id: number, content: string, creationTime: string, author: string, news: News) {
+  constructor(id: number, content: string, creationTime: string, author: string, rating: number) {
     super(id, content, creationTime);
     this.author = author;
-    this.news = news;
+    this.rating = rating;
   }
 }
